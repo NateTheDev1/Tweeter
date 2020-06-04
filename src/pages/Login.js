@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 import { registerUser } from "../actions/actionsIndex";
 
-const Login = (props) => {
+const Register = (props) => {
   const { register, handleSubmit, errors, getValues } = useForm();
 
   const submitUser = (e) => {
@@ -17,7 +17,7 @@ const Login = (props) => {
       email: getValues("email"),
       password: getValues("password"),
     };
-    console.log(newUser);
+
     props.registerUser(newUser).then((res) => console.log(res));
   };
 
@@ -78,6 +78,7 @@ const Login = (props) => {
               )
             </div>
           )}
+
           <div className="bottom">
             <button type="submit">Get Started</button>
             <div className="bottom-p">
@@ -93,4 +94,4 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { registerUser })(Login);
+export default connect(mapStateToProps, { registerUser })(Register);

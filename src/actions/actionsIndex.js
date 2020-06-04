@@ -9,3 +9,17 @@ export const registerUser = ({ email, password }) => async (dispatch) => {
     .createUserWithEmailAndPassword(email, password)
     .catch((error) => Promise.reject(error.message));
 };
+
+export const logout = () => (dispatch) => {
+  firebase
+    .auth()
+    .signOut()
+    .then((res) => console.log(res));
+};
+
+export const login = ({ email, password }) => {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch((error) => Promise.reject(error.message));
+};
