@@ -12,6 +12,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { SET_AUTH_USER } from "./reducers/types";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +27,10 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       console.log(user);
       if (user) {
+        localStorage.setItem("isAuth", true);
         this.props.dispatch({ type: SET_AUTH_USER, payload: user });
+      } else {
+        localStorage.setItem("isAuth", false);
       }
     });
   }
@@ -35,6 +39,8 @@ class App extends Component {
     this.authListener();
     console.log(this.props.user);
   }
+
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -48,6 +54,9 @@ class App extends Component {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/home">
+              <Home />
             </Route>
           </Switch>
         </Router>

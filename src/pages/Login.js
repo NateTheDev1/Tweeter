@@ -1,45 +1,3 @@
-// import React, { useState } from "react";
-// import { connect } from "react-redux";
-// import { login } from "../actions/actionsIndex";
-
-// const Login = (props) => {
-//   const [formState, setFormState] = useState({
-//     email: "",
-//     password: "",
-//   });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     props
-//       .login(formState)
-//       .then((_) => {
-//         console.log("Logged In");
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input
-//         type="email"
-//         value={formState.email}
-//         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-//       />
-//       <input
-//         type="password"
-//         value={formState.password}
-//         onChange={(e) =>
-//           setFormState({ ...formState, password: e.target.value })
-//         }
-//       />
-//       <button type="submit">Submit</button>
-//     </form>
-//   );
-// };
-
-// export default connect(() => ({}), { login })(Login);
 import React from "react";
 import { Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -47,12 +5,14 @@ import PeopleIcon from "@material-ui/icons/People";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { login } from "../actions/actionsIndex";
 
-const Register = (props) => {
+const Login = (props) => {
   const { register, handleSubmit, errors, getValues } = useForm();
+
+  const history = useHistory();
 
   const submitUser = (e) => {
     e.preventDefault();
@@ -61,7 +21,9 @@ const Register = (props) => {
       password: getValues("password"),
     };
 
-    props.login(credentials).then((res) => console.log(res));
+    props.login(credentials).then((_) => {
+      history.push("/home");
+    });
   };
 
   return (
@@ -137,4 +99,4 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { login })(Register);
+export default connect(mapStateToProps, { login })(Login);

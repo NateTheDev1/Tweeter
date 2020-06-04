@@ -11,7 +11,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case REGISTER_USER_SUCCESS:
       return state;
     case SET_AUTH_USER:
-      return { ...state, user: action.payload, isAuth: true };
+      return { ...state, user: action.payload, isAuth: !!action.payload };
     case SET_USER_LOGOUT:
       return {
         user: null,

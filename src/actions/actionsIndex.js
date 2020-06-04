@@ -18,7 +18,10 @@ export const logout = () => (dispatch) => {
   firebase
     .auth()
     .signOut()
-    .then((res) => dispatch({ type: SET_USER_LOGOUT, payload: null }));
+    .then((res) => {
+      localStorage.setItem("isAuth", false);
+      dispatch({ type: SET_USER_LOGOUT, payload: null });
+    });
 };
 
 export const login = ({ email, password }) => (dispatch) => {
