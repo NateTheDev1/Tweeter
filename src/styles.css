@@ -249,3 +249,13 @@ html {
   text-decoration: none;
   color: #4693d9;
 }
+
+/***********************************************
+/* Home Page Starts Here              *
+/***********************************************/
+.new-user-modal-container {
+  margin: 0 auto;
+  max-width: 1440px;
+  text-align: center;
+  height: 75vh;
+}

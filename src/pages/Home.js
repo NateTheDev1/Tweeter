@@ -3,7 +3,13 @@ import withAuthorization from "../helpers/withAuthorization";
 
 class Home extends React.Component {
   render() {
-    return <h1>Hello</h1>;
+    return (
+      <div className="home-container">
+        <div className="home-left"></div>
+        <div className="home-post"></div>
+        <div className="home-left"></div>
+      </div>
+    );
   }
 }
 

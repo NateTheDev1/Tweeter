@@ -13,6 +13,7 @@ import "firebase/auth";
 import { SET_AUTH_USER } from "./reducers/types";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import NewUserModal from "./components/NewUserModal";
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +41,9 @@ class App extends Component {
     console.log(this.props.user);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    localStorage.clear("firstTime");
+  }
 
   render() {
     return (
@@ -49,14 +52,22 @@ class App extends Component {
           {/* {this.props.user === null && <Redirect to="/" />} */}
           <Switch>
             <Route exact path="/">
-              <button onClick={this.handleLogout}>Logout</button>
               <Register />
             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/home">
+              <button onClick={this.handleLogout}>Logout</button>
               <Home />
+            </Route>
+            <Route exact path="/setup">
+              {/* {JSON.parse(localStorage.getItem("firstTime")) === true ? (
+                <NewUserModal />
+              ) : (
+                <Redirect to="/home" />
+              )} */}
+              <NewUserModal />
             </Route>
           </Switch>
         </Router>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import PeopleIcon from "@material-ui/icons/People";
@@ -9,10 +9,12 @@ import { Link, useHistory } from "react-router-dom";
 
 import { login } from "../actions/actionsIndex";
 
+import withGuest from "../helpers/withGuest";
+
 const Login = (props) => {
   const { register, handleSubmit, errors, getValues } = useForm();
 
-  const history = useHistory();
+  let history = useHistory();
 
   const submitUser = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Login = (props) => {
     };
 
     props.login(credentials).then((_) => {
+      console.log("Logged In");
       history.push("/home");
     });
   };
@@ -99,4 +102,4 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { login })(Login);
+export default withGuest(connect(mapStateToProps, { login })(Login));

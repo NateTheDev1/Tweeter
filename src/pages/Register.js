@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 
 import { registerUser } from "../actions/actionsIndex";
 
+import withGuest from "../helpers/withGuest";
+
 const Register = (props) => {
   const { register, handleSubmit, errors, getValues } = useForm();
 
@@ -19,7 +21,7 @@ const Register = (props) => {
       password: getValues("password"),
     };
 
-    props.registerUser(newUser).then((res) => console.log(res));
+    props.registerUser(newUser).then();
   };
 
   return (
@@ -95,4 +97,4 @@ const Register = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default withGuest(connect(mapStateToProps, { registerUser })(Register));
