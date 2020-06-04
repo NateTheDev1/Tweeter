@@ -3,8 +3,24 @@ import { Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import PeopleIcon from "@material-ui/icons/People";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 
-const Login = () => {
+import { registerUser } from "../actions/actionsIndex";
+
+const Login = (props) => {
+  const { register, handleSubmit, errors, getValues } = useForm();
+
+  const submitUser = (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: getValues("email"),
+      password: getValues("password"),
+    };
+    console.log(newUser);
+    props.registerUser(newUser).then((res) => console.log(res));
+  };
+
   return (
     <Grid container direction="row" justify="center">
       <Grid item className="landing-left">
@@ -25,19 +41,45 @@ const Login = () => {
       </Grid>
       <Grid item className="landing-right">
         <div className="top">
-          <i class="fas fa-crow"></i>
+          <i className="fas fa-crow"></i>
           <h1>See what's happening in the world right now</h1>
           <h3>Join Tweeter today.</h3>
         </div>
-        <form className="register">
+        <form className="register" onSubmit={submitUser}>
           <input
+            ref={register({
+              required: true,
+              pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            })}
+            name="email"
             type="text"
             placeholder="Email"
             style={{ marginBottom: "5%" }}
           />
-          <input type="password" placeholder="Password" />
+          {errors.email && (
+            <div>
+              ({errors.email.type === "required" && <p>Email is required</p>}(
+              {errors.email.type === "pattern" && <p>Invalid Email</p>})
+            </div>
+          )}
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            ref={register({ required: true, minLength: 6 })}
+          />
+          {errors.password && (
+            <div>
+              (
+              {errors.password.type === "minLength" && (
+                <p>Password must be 6 characters</p>
+              )}
+              ({errors.password.type === "required" && <p>Password Required</p>}
+              )
+            </div>
+          )}
           <div className="bottom">
-            <button>Get Started</button>
+            <button type="submit">Get Started</button>
             <div className="bottom-p">
               <p style={{ marginRight: "3%" }}>Have an account?</p>
               <a href="#">Log in</a>
@@ -49,4 +91,6 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, { registerUser })(Login);
