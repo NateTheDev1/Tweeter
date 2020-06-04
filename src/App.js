@@ -62,11 +62,11 @@ class App extends Component {
               <Home />
             </Route>
             <Route exact path="/setup">
-              {/* {JSON.parse(localStorage.getItem("firstTime")) === true ? (
+              {JSON.parse(localStorage.getItem("firstTime")) === true ? (
                 <NewUserModal />
               ) : (
                 <Redirect to="/home" />
-              )} */}
+              )}
               <NewUserModal />
             </Route>
           </Switch>

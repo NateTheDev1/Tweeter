@@ -5,7 +5,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { registerUser } from "../actions/actionsIndex";
 
@@ -14,6 +14,8 @@ import withGuest from "../helpers/withGuest";
 const Register = (props) => {
   const { register, handleSubmit, errors, getValues } = useForm();
 
+  let history = useHistory();
+
   const submitUser = (e) => {
     e.preventDefault();
     const newUser = {
@@ -21,7 +23,9 @@ const Register = (props) => {
       password: getValues("password"),
     };
 
-    props.registerUser(newUser).then();
+    props.registerUser(newUser).then((_) => {
+      history.push("/setup");
+    });
   };
 
   return (
