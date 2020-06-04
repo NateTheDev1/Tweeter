@@ -1,0 +1,251 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Mukta", sans-serif;
+}
+
+/***********************************************
+/* Landing Page Starts Here                    *
+/***********************************************/
+.landing-left {
+  padding: 20px 15%;
+
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+  background-color: #4693d9;
+  color: white;
+}
+
+.landing-left p {
+  font-weight: 700;
+}
+
+.icon-with-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-with-text .icon {
+  margin-right: 3%;
+}
+
+.landing-left .text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 30%;
+}
+
+.landing-right {
+  padding: 20px 14%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.landing-right .top {
+  width: 100%;
+}
+
+.top i {
+  font-size: 2.4rem;
+}
+
+.landing-right .top h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.landing-right .top h3 {
+  margin-top: 5%;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.register {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register input {
+  box-sizing: border-box;
+  font-family: "Mukta", sans-serif;
+  width: 100%;
+  padding: 2%;
+  border: 1px solid #f0f1f3;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.register input:focus {
+  outline: none !important;
+  box-shadow: 0 0 3px #4693d9;
+  background-color: white;
+}
+
+.bottom {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom button {
+  background-color: #4693d9;
+  border: 1px solid white;
+  border-radius: 15px;
+  padding: 2%;
+  color: white;
+  width: 30%;
+}
+
+.bottom-p {
+  width: 50%;
+  display: flex;
+  font-size: 0.9rem;
+}
+
+.bottom-p a {
+  text-decoration: none;
+  color: #4693d9;
+}
