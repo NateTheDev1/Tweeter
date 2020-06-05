@@ -8,6 +8,9 @@ import {
   Fab,
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
+import { connect } from "react-redux";
+import { createNewProfile } from "../actions/actionsIndex";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   paper: {
@@ -17,16 +20,22 @@ const useStyles = makeStyles({
   },
 });
 
-const NewUserModal = () => {
+const NewUserModal = (props) => {
   const [formValues, setFormValues] = useState({
     fullName: "",
     username: "",
     avatarURL: "",
+    bio: "",
   });
+
+  const history = useHistory();
 
   const handleMockSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    props.createNewProfile(formValues, props.user.uid).then((_) => {
+      localStorage.clear("firstTime");
+      history.push("/home");
+    });
   };
 
   const classes = useStyles();
@@ -45,7 +54,7 @@ const NewUserModal = () => {
         open={true}
       >
         <DialogTitle style={{ background: "#4693d9" }}>
-          <h1
+          <span
             style={{
               color: "white",
               fontWeight: "400",
@@ -55,7 +64,7 @@ const NewUserModal = () => {
             }}
           >
             Create Profile
-          </h1>
+          </span>
           <p style={{ color: "lightgray" }}>Create your public persona.</p>
         </DialogTitle>
         <DialogContent
@@ -75,7 +84,13 @@ const NewUserModal = () => {
               InputLabelProps={{ shrink: true }}
               label="Full Name"
               style={{ marginBottom: "5%" }}
-              onChange={(e) => setFormValues(e.target.value)}
+              name="fullName"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  [e.target.name]: e.target.value,
+                })
+              }
               required
               inputProps={{ maxLength: 20, minLength: 5 }}
               value={formValues.fullName}
@@ -88,7 +103,13 @@ const NewUserModal = () => {
               placeholder="user1234"
               label="Username"
               style={{ marginBottom: "5%" }}
-              onChange={(e) => setFormValues(e.target.value)}
+              name="username"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  [e.target.name]: e.target.value,
+                })
+              }
               value={formValues.username}
               required
               inputProps={{ maxLength: 12, minLength: 5 }}
@@ -101,8 +122,32 @@ const NewUserModal = () => {
               placeholder="https://website.com/profileImage.png"
               label="Avatar URL"
               style={{ marginBottom: "5%" }}
-              onChange={(e) => setFormValues(e.target.value)}
+              name="avatarURL"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  [e.target.name]: e.target.value,
+                })
+              }
               value={formValues.avatarURL}
+            />
+            <TextField
+              required
+              style={{ marginBottom: "5%" }}
+              InputLabelProps={{ shrink: true }}
+              multiline
+              rows={4}
+              placeholder="I'm such a unique human being!"
+              variant="filled"
+              value={formValues.bio}
+              fullWidth
+              name="bio"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  [e.target.name]: e.target.value,
+                })
+              }
             />
             <Fab
               size="large"
@@ -119,4 +164,6 @@ const NewUserModal = () => {
   );
 };
 
-export default NewUserModal;
+export default connect((state) => ({ user: state.userReducer.user }), {
+  createNewProfile,
+})(NewUserModal);

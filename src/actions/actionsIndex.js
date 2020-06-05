@@ -35,3 +35,29 @@ export const login = ({ email, password }) => (dispatch) => {
     })
     .catch((error) => Promise.reject(error.message));
 };
+
+export const createNewProfile = (newProfile, uid) => async (dispatch) => {
+  const modifiedUser = await generateProfile(newProfile, uid);
+
+  return db
+    .collection("profiles")
+    .doc(uid)
+    .set(modifiedUser)
+    .then((res) => {
+      // dispatch({type: SET_USER_PROFILE, payload: res})
+      console.log(res);
+    });
+};
+
+const generateProfile = (newProfile, uid) => {
+  return (newProfile = {
+    fullName: newProfile.fullName,
+    username: newProfile.username,
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    avatar: newProfile.avatarURL,
+    posts: [],
+    friends: [],
+    bio: newProfile.bio,
+    id: uid,
+  });
+};
