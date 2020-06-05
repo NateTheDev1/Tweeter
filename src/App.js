@@ -29,6 +29,7 @@ class App extends Component {
       console.log(user);
       if (user) {
         localStorage.setItem("isAuth", true);
+        localStorage.setItem("uid", user.uid);
         this.props.dispatch({ type: SET_AUTH_USER, payload: user });
       } else {
         localStorage.setItem("isAuth", false);
@@ -43,6 +44,7 @@ class App extends Component {
 
   componentWillUnmount() {
     localStorage.clear("firstTime");
+    localStorage.clear("uid");
   }
 
   render() {
