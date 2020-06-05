@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import { connect } from "react-redux";
-import { createNewProfile } from "../actions/actionsIndex";
+import { createNewProfile, logout } from "../actions/actionsIndex";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -34,7 +34,7 @@ const NewUserModal = (props) => {
     e.preventDefault();
     props.createNewProfile(formValues, props.user.uid).then((_) => {
       localStorage.clear("firstTime");
-      history.push("/home");
+      props.logout();
     });
   };
 
@@ -165,5 +165,6 @@ const NewUserModal = (props) => {
 };
 
 export default connect((state) => ({ user: state.userReducer.user }), {
+  logout,
   createNewProfile,
 })(NewUserModal);
